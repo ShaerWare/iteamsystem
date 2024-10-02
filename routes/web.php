@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatGPTController;
+
+
+Route::get('/chat',[ChatGPTController::class,"index"])->name("view_chat");
+Route::post('/get-chat',[ChatGPTController::class,"ask"])->name("get_chat");
 
 Route::get('/', function () {
     return view('welcome');
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
