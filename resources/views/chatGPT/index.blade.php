@@ -33,8 +33,6 @@
     <div class="container chat-container">
         <div class="chat-box border">
             <!-- Sample messages -->
-            <p><strong>User:</strong> привет</p>
-            <p><strong>ChatGPT:</strong> Привет!Как я могу вам помочь сегодня?</p>
 
         <div class="chat-input-container">
             <div class="input-group">

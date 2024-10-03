@@ -15,7 +15,7 @@ class ChatGPTController extends Controller
     public function ask(Request $request)
     {
         $result = OpenAI::completions()->create([
-            'model' => 'gpt-3.5-turbo',
+            'model' => 'text-embedding-3-small',
             'messages' => [
                 ['role' => 'user', 'content' => 'Hello!'],
             ],
