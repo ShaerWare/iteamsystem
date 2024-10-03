@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,12 +31,12 @@
 <body>
     <div class="container chat-container">
         <div class="chat-box border">
-            <!-- Sample messages -->
+            <!-- Messages will be displayed here -->
+        </div>
 
         <div class="chat-input-container">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Type your message here..."
-                    aria-label="Message input">
+                <input type="text" class="form-control" placeholder="Type your message here..." aria-label="Message input">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button">Send</button>
                 </div>
@@ -56,16 +55,19 @@
             const $inputField = $('.form-control');
             const $chatBox = $('.chat-box');
 
-            $sendButton.on('click', function() {
+            $sendButton.on('click', function(event) {
+                // Предотвращаем стандартное поведение формы (если используется)
+                event.preventDefault();
+
                 const messageContent = $inputField.val();
 
-                // If the message is empty, return
+                // Если сообщение пустое, не отправляем запрос
                 if (!messageContent) return;
 
-                // Append user message to chat box
+                // Добавляем сообщение пользователя в чат
                 $chatBox.append(`<p><strong>User:</strong> ${messageContent}</p>`);
 
-                // Send the content to the Laravel route
+                // Отправляем запрос на сервер
                 $.ajax({
                     url: '{{ route('get_chat') }}',
                     method: 'POST',
@@ -78,24 +80,32 @@
                     },
                     dataType: 'json',
                     success: function(data) {
-                        // Append the chatbot's response to the chat box
+                        // Добавляем ответ ChatGPT в чат
                         if (data && data.content) {
                             $chatBox.append(`<p><strong>ChatGPT:</strong> ${data.content}</p>`);
-
-                            // Scroll to the bottom of the chat box to show the latest messages
-                            $chatBox.scrollTop($chatBox[0].scrollHeight);
                         }
 
-                        // Clear the input field
+                        // Прокручиваем до последнего сообщения
+                        $chatBox.scrollTop($chatBox[0].scrollHeight);
+
+                        // Очищаем поле ввода
                         $inputField.val('');
                     },
-                    error: function(error) {
-                        console.error('Error:', error);
+                    error: function(xhr) {
+                        // Обрабатываем ошибки
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            const errorMessage = xhr.responseJSON.error.message || 'An error occurred';
+                            $chatBox.append(`<p><strong>Error:</strong> ${errorMessage}</p>`);
+                        } else {
+                            $chatBox.append(`<p><strong>Error:</strong> Something went wrong.</p>`);
+                        }
+
+                        // Прокручиваем до последнего сообщения
+                        $chatBox.scrollTop($chatBox[0].scrollHeight);
                     }
                 });
             });
         });
     </script>
 </body>
-
 </html>
