@@ -14,15 +14,13 @@ class ChatGPTController extends Controller
 
     public function ask(Request $request)
     {
-        $request->validate([
-            'message' => "required|string"
-        ]);
-
         $result = OpenAI::completions()->create([
-            'model' => 'text-davinci-003',
-            'prompt' => $request->message . " the response should be only 100 chars",
+            'model' => 'gpt-3.5-turbo',
+            'messages' => [
+                ['role' => 'user', 'content' => 'Hello!'],
+            ],
         ]);
-
-        return response()->json(["content" => $result['choices'][0]['text']]);
+dd($result);
+        echo $result->choices[0]->message->content;
     }
 }
