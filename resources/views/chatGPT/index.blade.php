@@ -36,7 +36,7 @@
 
         <div class="chat-input-container">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Type your message here..." aria-label="Message input">
+                <input type="text" class="form-control" placeholder="Сюда можно что-нибудь написать..." aria-label="Message input">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button">Send</button>
                 </div>
@@ -65,7 +65,7 @@
                 if (!messageContent) return;
 
                 // Добавляем сообщение пользователя в чат
-                $chatBox.append(`<p><strong>User:</strong> ${messageContent}</p>`);
+                $chatBox.append(`<p><strong>Вы:</strong> ${messageContent}</p>`);
 
                 // Отправляем запрос на сервер
                 $.ajax({
