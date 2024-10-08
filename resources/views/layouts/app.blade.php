@@ -12,7 +12,11 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <script src="../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+        <!-- Подключаем Font Awesome для иконок -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <!-- Main Theme Js -->
         <script src="../assets/js/main.js"></script>
 
@@ -63,9 +67,7 @@
             <footer class="footer mt-auto py-3 bg-white text-center">
                 <div class="container">
                     <span class="text-muted"> Copyright © <span id="year"></span>
-                           All
-                        rights
-                        reserved
+                           All rights reserved
                     </span>
                 </div>
             </footer>
